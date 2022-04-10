@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "artifact-unblocker",
+  "version": "1.0.0",
+  "description": "Artifact unblocker for ESLauncher2#140",
+  "main": "index.js",
+  "author": "MCOfficer <mcofficer@gmx.de>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.12.0",
+    "itty-router": "^2.1.9",
+    "serverless-cloudflare-workers": "^1.2.0"
+  }
+}
