@@ -19,15 +19,35 @@ router.get("/", () => {
 })
 
 router.get("/artifact/:id", async ({ params }) => {
-  let response = await octokit.rest.actions.getArtifact({
-    "owner": esOwner,
-    "repo": esRepo,
-    "artifact_id": params.id
-  })
-  return new Response(JSON.stringify(response.data), {
-    headers: response.headers,
-    status: response.status,
-  })
+  try {
+    let response = await octokit.rest.actions.downloadArtifact({
+      request: {
+        redirect: 'manual' // Lest octokit follows the redirect
+      },
+      "owner": esOwner,
+      "repo": esRepo,
+      "artifact_id": params.id,
+      "archive_format": "zip"
+    })
+    return new Response(JSON.stringify(response.data), {
+      headers: response.headers,
+      status: response.status
+    })
+  } catch (e) {
+    if (e.response) {
+      return new Response(JSON.stringify(e.response.data), {
+        headers: e.response.headers,
+        status: e.response.status
+      })
+    }
+    else {
+      return new Response('{"error": "Unknown Error"}', {
+        headers: { "Content-Type": "application/json" },
+        status: e.status
+      })
+    }
+    console.log(JSON.stringify(e))
+  }
 })
 
 // Catch-all 404
