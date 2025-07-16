@@ -1,14 +1,15 @@
-import { Router } from 'itty-router'
+import { IttyRouter } from 'itty-router';
 import { Octokit } from "@octokit/rest";
+import { env } from "cloudflare:workers";
 
 const octokit = new Octokit({
-  auth: API_KEY
+  auth: env.API_KEY
 });
 const esOwner = "endless-sky"
 const esRepo = esOwner
 
 // Create a new router
-const router = Router()
+const router = IttyRouter()
 
 router.get("/", () => {
   return new Response(`
@@ -46,13 +47,10 @@ router.get("/artifact/:id", async ({ params }) => {
         status: e.status
       })
     }
-    console.log(JSON.stringify(e))
   }
 })
 
 // Catch-all 404
 router.all("*", () => new Response("404, not found!", { status: 404 }))
 
-addEventListener('fetch', (e) => {
-  e.respondWith(router.handle(e.request))
-})
+export default router;

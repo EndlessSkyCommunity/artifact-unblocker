@@ -13,4 +13,4 @@ for local development:
 
 deploy:
 - `wrangler secret put API_KEY` -> enter your key
-- `wrangler publish` to deploy (to your account)
+- `wrangler deploy` to deploy (to your account)

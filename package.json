@@ -7,11 +7,11 @@
   "author": "MCOfficer <mcofficer@gmx.de>",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "wrangler": "^4.24.4"
   },
   "dependencies": {
-    "@octokit/rest": "18.12.0",
-    "itty-router": "^2.1.9",
-    "serverless-cloudflare-workers": "^1.2.0"
+    "@octokit/rest": "22.*",
+    "itty-router": "5.*"
   }
 }
